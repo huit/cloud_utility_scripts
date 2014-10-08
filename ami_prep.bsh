@@ -1,0 +1,54 @@
+#!/bin/bash
+
+LOGDIR=/var/log
+
+
+# remove at job to terminate instance
+
+for i in `atq | awk '{print $1}'`;do atrm $i;done
+
+# stop apache and remove its logs
+/sbin/service httpd stop
+/usr/bin/pkill -9 httpd
+rm -rf ${LOGDIR}/httpd
+mkdir ${LOGDIR}/httpd
+
+# stop syslog and remove logs
+/sbin/service rsyslog stop
+rm -f ${LOGDIR}/messages*
+
+# stop ntp and remove logs
+/sbin/service ntpd stop
+rm -f ${LOGDIR}/ntpstats/*
+
+# remove a whole bunch of other log files
+rm -f audit/*
+rm -f ${LOGDIR}/aws*
+cat /dev/null > ${LOGDIR}/boot.log
+cat /dev/null > ${LOGDIR}/btmp
+rm -f ${LOGDIR}/btmp-*
+rm -f ${LOGDIR}/cfn-*
+rm -f ${LOGDIR}/cloud-*
+cat /dev/null > ${LOGDIR}/cron
+rm -f ${LOGDIR}/cron-*
+rm -f ${LOGDIR}/dmesg*
+cat /dev/null > ${LOGDIR}/dracut.log
+rm -f ${LOGDIR}/dracut.log-*
+cat /dev/null > ${LOGDIR}/lastlog
+cat /dev/null > ${LOGDIR}/logstatus
+cat /dev/null > ${LOGDIR}/mail/*
+cat /dev/null > ${LOGDIR}/maillog
+rm -f ${LOGDIR}/maillog-*
+cat /dev/null > ${LOGDIR}/processes.log
+rm -f ${LOGDIR}/processes.log-*
+cat /dev/null > ${LOGDIR}/process-monitoring
+rm -f ${LOGDIR}/sa/*
+cat /dev/null > ${LOGDIR}/secure
+rm -rf ${LOGDIR}/secure-*
+cat /dev/null > ${LOGDIR}/spooler
+cat /dev/null > ${LOGDIR}/tallylog
+cat /dev/null > ${LOGDIR}/wtmp
+rm -f ${LOGDIR}/wtmp-*
+
+rm -f ${LOGDIR}/yum*
+
