@@ -22,7 +22,7 @@ rm -f ${LOGDIR}/messages*
 rm -f ${LOGDIR}/ntpstats/*
 
 # remove a whole bunch of other log files
-rm -f audit/*
+rm -f ${LOGDIR}/audit/*
 rm -f ${LOGDIR}/aws*
 cat /dev/null > ${LOGDIR}/boot.log
 cat /dev/null > ${LOGDIR}/btmp
