@@ -12,6 +12,7 @@ for i in `atq | awk '{print $1}'`;do atrm $i;done
 /usr/bin/pkill -9 httpd
 rm -rf ${LOGDIR}/httpd
 mkdir ${LOGDIR}/httpd
+rm -f /etc/httpd/conf.d/00-logging.conf
 
 # stop syslog and remove logs
 /sbin/service rsyslog stop
