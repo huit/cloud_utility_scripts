@@ -21,6 +21,17 @@ rm -f ${LOGDIR}/messages*
 /sbin/service ntpd stop
 rm -f ${LOGDIR}/ntpstats/*
 
+# stop NewRelic and remove configs and logs
+/sbin/service newrelic-daemon stop
+/sbin/chkconfig newrelic-daemon off
+/sbin/service newrelic-sysmond stop
+/sbin/chkconfig newrelic-sysmond off
+rm -f /etc/php-5.5.d/newrelic*
+rm -f /etc/php-5.6.d/newrelic*
+rm -f /etc/alternatices/php.d/newrelic*
+rm -rf /var/log/newrelic/
+
+
 # remove a whole bunch of other log files
 rm -f audit/*
 rm -f ${LOGDIR}/aws*
